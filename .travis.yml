@@ -1,6 +1,9 @@
 sudo: required
 dist: xenial
 language: python
+arch:
+  - amd64
+  - ppc64le
 python:
   - 3.5
   - 3.6
@@ -8,6 +11,10 @@ python:
   - 3.8
   - pypy3.6-7.1.1
 
+matrix:
+  exclude:
+     - python: pypy3.6-7.1.1
+       arch: ppc64le
 cache:
   apt: true
   pip: true
