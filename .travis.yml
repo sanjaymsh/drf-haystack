@@ -48,7 +48,7 @@ before_install:
     else
       wget https://raw.githubusercontent.com/ppc64le/build-scripts/master/e/elasticsearch/elasticsearch_6.5.4_ubuntu_18.04.sh
       sudo chmod 777 elasticsearch_6.5.4_ubuntu_18.04.sh
-      sudo /elasticsearch_6.5.4_ubuntu_18.04.sh
+      sudo ./elasticsearch_6.5.4_ubuntu_18.04.sh
     fi
   - sudo service elasticsearch restart
 
