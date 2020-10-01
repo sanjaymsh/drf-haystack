@@ -34,6 +34,7 @@ before_install:
   # See https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html#deb-repo
   - wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
   - >
+    if [[ "$TRAVIS_ARCH" = "amd64" ]]; then
     if [[ $ES_VERSION == '>=2.0.0,<3.0.0' ]];
     then
       echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
@@ -43,6 +44,11 @@ before_install:
       echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
       sudo apt-get update
       sudo apt-get -y --allow-downgrades install elasticsearch=1.7.6
+    fi
+    else
+      wget https://raw.githubusercontent.com/ppc64le/build-scripts/master/e/elasticsearch/elasticsearch_6.5.4_ubuntu_18.04.sh
+      chmod 777 elasticsearch_6.5.4_ubuntu_18.04.sh
+      ./elasticsearch_6.5.4_ubuntu_18.04.sh
     fi
   - sudo service elasticsearch restart
 
